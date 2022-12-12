@@ -20,7 +20,7 @@ function draw_empty_board() {
 
 function fill_board() {
 	$.ajax(
-        {url: "chess.php/board/",
+        {url: "blokus.php/board/",
         success: fill_board_by_data }
         );
 	
@@ -28,7 +28,7 @@ function fill_board() {
 
 function reset_board() {
 	$.ajax(
-        {url: "chess.php/board/",
+        {url: "blokus.php/board/",
         method:'post',  
         success: fill_board_by_data }
         );
@@ -38,9 +38,9 @@ function reset_board() {
 function fill_board_by_data(data) {
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
-		var id = '#square_'+ o.x +'_' + o.y;
-		var c = (o.piece_shape!=null)?o.piece_color :'';
-		var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.png">':'';
+		var id = '#square_'+ o.xA +'_' + o.yA;
+		var c = (o.piece_shape!=null)?o.piece_color:'';
+		var im = (o.piece_shape!=null)?'<img class="piece_shape" src="images/'+c+'.png">':'';
 		$(id).addClass(o.piece_color+'_square').html(im);
 		
 	}
