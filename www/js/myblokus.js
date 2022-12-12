@@ -1,5 +1,7 @@
 $(function () {
 	draw_empty_board();
+    fill_board();
+    $('blokus_reset').click(reset_board);
 });
 
 function draw_empty_board() {
@@ -16,37 +18,18 @@ function draw_empty_board() {
 	$('#blokus_board').html(t);
 }
 
-function draw_empty_boardRED() {
-	var t='<table id="blokus_table">';
-	for(var i=20;i>0;i--) {
-		t += '<tr>';
-		for(var j=1;j<21;j++) {
-			t += '<td class="blokus_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
-		}
-		t+='</tr>';
-	}
-	t+='</table>';
-	
-	$('#blokus_board').html(t);
-}
-
-function draw_empty_boardBLUE() {
-	var t='<table id="blokus_table">';
-	for(var i=20;i>0;i--) {
-		t += '<tr>';
-		for(var j=1;j<21;j++) {
-			t += '<td class="blokus_square" id="square_'+j+'_'+i+'">' + j +','+i+'</td>'; 
-		}
-		t+='</tr>';
-	}
-	t+='</table>';
-	
-	$('#blokus_board').html(t);
-}
-
 function fill_board() {
 	$.ajax(
-        {url: "chess.php/board/", 
+        {url: "chess.php/board/",
+        success: fill_board_by_data }
+        );
+	
+}
+
+function reset_board() {
+	$.ajax(
+        {url: "chess.php/board/",
+        method:'post',  
         success: fill_board_by_data }
         );
 	
@@ -56,10 +39,9 @@ function fill_board_by_data(data) {
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
 		var id = '#square_'+ o.x +'_' + o.y;
-        $(id).addClass(o.piece_color+'_square')
-		var c = (o.piece!=null)?o.piece_color + o.piece:'';
-		var im = (o.piece!=null)?'<img class="piece" src="images/'+c+'.png">':'';
-		$(id).addClass(o.b_color+'_square').html(im);
+		var c = (o.piece_shape!=null)?o.piece_color :'';
+		var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.png">':'';
+		$(id).addClass(o.piece_color+'_square').html(im);
 		
 	}
 }
