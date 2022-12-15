@@ -132,16 +132,16 @@ class ParsedData {
 }
 
 function fill_board_by_data(data) {
-	const parsedData = JSON.parse(data);
-	const array = [];
+	//const parsedData = JSON.parse(data);
+	//const array = [];
 
-	parsedData.forEach(element => {
-		array.push(new ParsedData(element.xA, element.yA, element.piece_color, element.piece_shape));
-	});
+	// parsedData.forEach(element => {
+	// 	array.push(new ParsedData(element.xA, element.yA, element.piece_color, element.piece_shape));
+	// });
 
 	//console.log(array);
-	for(var i=0;i<array.length;i++) {
-		var o = array[i];
+	for(var i=0;i<data.length;i++) {
+		var o = data[i];
 		var id = '#square_'+ o.xA +'_' + o.yA;
 		var c = (o.piece_shape!=null)?o.piece_color:'';
 		var pc= (o.piece_shape!=null)?'piece'+o.piece_color:'';
