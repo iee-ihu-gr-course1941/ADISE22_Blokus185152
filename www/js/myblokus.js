@@ -139,7 +139,6 @@ function fill_board_by_data(data) {
 	// 	array.push(new ParsedData(element.xA, element.yA, element.piece_color, element.piece_shape));
 	// });
 
-	console.log(data);
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
 		var id = '#square_'+ o.xA +'_' + o.yA;
