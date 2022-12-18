@@ -8,8 +8,16 @@ require_once "../lib/users.php";
 
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
-//$request = explode('/', trim($_SERVER['SCRIPT_NAME'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
+if($input==null) {
+        $input=[];
+}
+if(isset($_SERVER['HTTP_X_TOKEN'])) {
+        $input['token']=$_SERVER['HTTP_X_TOKEN'];
+} else {
+        $input['token']='';
+}
+
 
 switch ($r=array_shift($request)){
 	case 'board' :
@@ -51,7 +59,12 @@ function handle_board($method){
 }
 
 function handle_piece($method,$x,$y,$input){
-;
+        if($method=='GET') {
+                show_piece($x,$y);
+        } else if ($method=='PUT') {
+                move_piece($x,$y,$input['x'],$input['y'],  
+                $input['token']);
+        }
 }
 
 function handle_player($method,$p,$input){

@@ -119,6 +119,30 @@ function reset_board() {
 	
 }
 
+function do_move() {
+	var s = $('#the_move').val();
+	
+	var a = s.trim().split(/[ ]+/);
+	if(a.length!=4) {
+		alert('Must give 4 numbers');
+		return;
+	}
+	$.ajax({url: "blokus.php/board/piece_shepe/"+a[0]+'/'+a[1], 
+			method: 'PUT',
+			dataType: "json",
+			contentType: 'application/json',
+			data: JSON.stringify( {x: a[2], y: a[3]}),
+			headers: {"X-Token": me.token},
+			success: move_result,
+			error: login_error});
+	
+}
+
+function move_result(data){
+	game_status_update();
+	fill_board_by_data(data);
+}
+
 class ParsedData {
 	xA;
 	yA;
