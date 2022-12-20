@@ -9,6 +9,7 @@ require_once "../lib/users.php";
 $method = $_SERVER['REQUEST_METHOD'];
 $request = explode('/', trim($_SERVER['PATH_INFO'],'/'));
 $input = json_decode(file_get_contents('php://input'),true);
+
 if($input==null) {
         $input=[];
 }
@@ -28,13 +29,23 @@ switch ($r=array_shift($request)){
                         case 'piece': 
                                 handle_piece($method, $request[0],$request[1],$input);
                         	break;
-                        // case 'player':
-                        //         handle_player($method,$request[0],$input);
-                        //         break;
                         default: header("HTTP/1.1 404 Not Found");
                                 break;           
                         }
                 break;
+        case 'repository' :
+                switch ($b=array_shift($request)){
+                        case '': 
+                        case null: handle_repo($method);
+                                break;
+                        case 'R': handle_repoR($method);
+                        break;
+                        case 'B': handle_repoB($method);
+                        break;        
+                        default: header("HTTP/1.1 404 Not Found");
+                        break;           
+                }
+                break;        
         case 'status':
                 if(sizeof($request)==0){handle_status($method);}
                 else{header("HTTP/1.1 404 Not Found");}
@@ -46,13 +57,36 @@ switch ($r=array_shift($request)){
                 exit;
 }
 
+function handle_repo($method){
+        if($method=='POST'){
+                reset_repository();             
+        }else{
+                header('HTPP/1.1 405 Method Not Allowed');
+        }
+}
+
+function handle_repoR($method){
+        if($method=='GET'){
+                show_repositoryR();
+        }else{
+                header('HTPP/1.1 405 Method Not Allowed');
+        }
+}
+
+function handle_repoB($method){
+        if($method=='GET'){
+                show_repositoryB();
+        }else{
+                header('HTPP/1.1 405 Method Not Allowed');
+        }
+}
 
 
 function handle_board($method){
         if($method=='GET'){
                 show_board();
         }else if($method=='POST'){
-                reset_board();
+                reset_board();            
         }else{
                 header('HTPP/1.1 405 Method Not Allowed');
         }

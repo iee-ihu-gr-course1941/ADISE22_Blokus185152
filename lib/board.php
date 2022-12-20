@@ -55,10 +55,39 @@ function move_piece($x,$y,$x2,$y2,$token) {
 	exit;
 }
 
-function show_board(){
+function show_board() {
+	
+	global $mysqli;
+	
+	$sql = 'select * from board';
+	$st = $mysqli->prepare($sql);
+
+	$st->execute();
+	$res = $st->get_result();
+
+	header('Content-type: application/json');
+	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+
+}
+
+
+function show_repositoryR(){
     global $mysqli;
 
-    $sql = 'select * from board';
+    $sql = 'select * from red_repository';
+    $st = $mysqli->prepare($sql);
+
+    $st->execute();
+    $res = $st->get_result();
+
+    header('Content_type: application/json');
+    print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+}
+
+function show_repositoryB(){
+    global $mysqli;
+
+    $sql = 'select * from blue_repository';
     $st = $mysqli->prepare($sql);
 
     $st->execute();
@@ -75,6 +104,17 @@ function reset_board(){
     $mysqli->query($sql);
 
     show_board();
+}
+
+function reset_repository(){
+    global $mysqli;
+
+    $sql = 'call full_repositories()';
+    $mysqli->query($sql);
+
+	show_repositoryR();
+    show_repositoryB();
+	
 }
 
 function read_board() {

@@ -9,8 +9,11 @@ $(function () {
 	draw_empty_board(null);
     fill_board();
 	//console.log("aaa");
-    //$('blokus_reset').click(reset_board);
+    $('blokus_reset').click(reset_board);
 	$('#blokus_login').click( login_to_game);
+	draw_empty_RepoR(null);
+	draw_empty_RepoB(null);
+	//fill_RED_tables();
 });
 
 function draw_empty_board(p) {
@@ -32,6 +35,32 @@ function draw_empty_board(p) {
 	t+='</table>';
 	
 	$('#blokus_board').html(t);
+	//$('.blokus_square').click(click_on_piece);
+}
+
+function draw_empty_RepoR(p) {
+	var t='<table id="repo_Red_table">';
+	t += '<tr>';
+		for(var j=1;j<22;j++) {
+			t += '<td class="RED_repo_square" id="REDsquare_'+j+'">' + j +'</td>'; 
+		}
+	t+='</tr>';
+	t+='</table>';
+	
+	$('#blokus_repoR').html(t);
+	//$('.blokus_square').click(click_on_piece);
+}
+
+function draw_empty_RepoB(p) {
+	var t='<table id="repo_Blue_table">';
+	t += '<tr>';
+		for(var j=1;j<22;j++) {
+			t += '<td class="BLUE_repo_square" id="BLUEsquare_'+j+'">' + j +'</td>'; 
+		}
+	t+='</tr>';
+	t+='</table>';
+	
+	$('#blokus_repoB').html(t);
 	//$('.blokus_square').click(click_on_piece);
 }
 
@@ -110,13 +139,14 @@ function update_info(){
 }
 
 function reset_board() {
-	$.ajax(
-        {url: "blokus.php/board/",
-        method:'post',  
-         success: fill_board_by_data }
-         );
-		
-	
+	$.ajax({url: "blokus.php/board/", headers: {"X-Token": me.token}, method: 'POST',  success: fill_board_by_data });
+	$('#move_div').hide();
+	$('#game_initializer').show(2000);
+	reset_repositorys();
+}
+
+function reset_repositorys() {
+	$.ajax({url: "blokus.php/repository/", headers: {"X-Token": me.token}, method: 'POST',  success: fill_REDrepo_by_data });
 }
 
 function do_move() {
@@ -143,36 +173,64 @@ function move_result(data){
 	fill_board_by_data(data);
 }
 
-class ParsedData {
-	xA;
-	yA;
-	piece_color;
-	piece_shape;
+// class ParsedData {
+// 	xA;
+// 	yA;
+// 	piece_color;
+// 	piece_shape;
 
-	constructor(xA, yA, piece_color, piece_shape) {
-		this.xA = xA;
-		this.yA = yA;
-		this.piece_color = piece_color;
-		this.piece_shape = piece_shape;
-	}
-}
+// 	constructor(xA, yA, piece_color, piece_shape) {
+// 		this.xA = xA;
+// 		this.yA = yA;
+// 		this.piece_color = piece_color;
+// 		this.piece_shape = piece_shape;
+// 	}
+// }
 
 function fill_board_by_data(data) {
-	const parsedData = JSON.parse(data);
-	const array = [];
-
-	 parsedData.forEach(element => {
-	 	array.push(new ParsedData(element.xA, element.yA, element.piece_color, element.piece_shape));
-	 });
-
-	for(var i=0;i<array.length;i++) {
-		var o = array[i];
+	board=data;
+	for(var i=0;i<data.length;i++) {
+		var o = data[i];
 		var id = '#square_'+ o.xA +'_' + o.yA;
-		var c = (o.piece_shape!=null)?o.piece_color:'';
-		var pc= (o.piece_shape!=null)?'piece'+o.piece_color:'';
-		var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.jpg">':'';
-        
-		$(id).addClass(o.piece_color+'_square').html(im);	
+		var c = (o.piece_shape!=null)?o.piece_color :'';
+		var pc= (o.piece_shape!=null)?'piece_shape'+o.piece_color:'';
+		var im = (o.piece_shape!=null)?'<img class="piece '+pc+'" src="images/'+c+'.jpg">':'';
+		$(id).addClass(o.piece_shape+'_square').html(im);
 	}
- 
+	
+	// const parsedData = JSON.parse(data);
+	// const array = [];
+
+	//  parsedData.forEach(element => {
+	//  	array.push(new ParsedData(element.xA, element.yA, element.piece_color, element.piece_shape));
+	//  });
+
+	// for(var i=0;i<array.length;i++) {
+	// 	var o = array[i];
+	// 	var id = '#square_'+ o.xA +'_' + o.yA;
+	// 	var c = (o.piece_shape!=null)?o.piece_color:'';
+	// 	var pc= (o.piece_shape!=null)?'piece'+o.piece_color:'';
+	// 	var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.jpg">':'';
+        
+	// 	$(id).addClass(o.piece_color+'_square').html(im);	
+	// }
+}
+
+function fill_RED_tables() {
+	$.ajax({url: "blokus.php/repository/R", success: fill_RED_repo_by_data });
+	
+}
+
+function fill_RED_repo_by_data(datass) {
+	console.log(datass);
+	for(var i=1;i<datass.length+1;i++) {
+		
+		var o = datass[i-1];
+		var id = '#REDsquare_'+i;
+		var c = (o.piece_shape!=null)?o.piece_shape:'';
+		//var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.png">':'';
+		$(id).addClass(o.piece_shape+'_REDsquare').html(c);
+		
+	}
+	
 }
