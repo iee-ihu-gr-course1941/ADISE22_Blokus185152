@@ -221,13 +221,13 @@ function fill_board_by_data(data) {
 
 function fill_RED_repo_by_data(dataR) {
 	repositoryR=dataR;
-	console.log("repositoryR");
+	console.log("repositoryR EFTASES EDW");
 	console.log(repositoryR);
 	for(var i=1;i<dataR.length+1;i++) {
 		
 		var o = dataR[i-1];
 		var id = '#REDsquare_'+i;
-		var c = (o.val='W')?o.piece_shape :'';
+		var c = (o.val!='W')?o.piece_shape :'';
 		$(id).addClass(o.piece_shape+'_REDsquare').html(c);
 		
 		
@@ -235,14 +235,14 @@ function fill_RED_repo_by_data(dataR) {
 }
 
 function fill_BLUE_repo_by_data(dataB) {
-	console.log("repositoryB");
+	console.log("repositoryB EFTASES EDW");
 	console.log(dataB);
 	repositoryR=dataB;
 	for(var i=1;i<dataB.length+1;i++) {
 
 		var o = dataB[i-1];
 		var id = '#BLUEsquare_'+i;
-		var c = (o.val='W')?o.piece_shape :'';
+		var c = (o.val!='W')?o.piece_shape :'';
 		$(id).addClass(o.piece_shape+'_BLUEsquare').html(c);
 	}
 	
