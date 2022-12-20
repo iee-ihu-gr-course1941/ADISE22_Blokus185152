@@ -36,12 +36,14 @@ switch ($r=array_shift($request)){
         case 'repository' :
                 switch ($b=array_shift($request)){
                         case '': 
-                        case null: handle_repo($method);
-                                break;
                         case 'R': handle_repoR($method);
                         break;
                         case 'B': handle_repoB($method);
-                        break;        
+                        break;
+                        // case 'RR': handle_repoRR($method);
+                        // break;
+                        // case 'BR': handle_repoBR($method);
+                        // break;
                         default: header("HTTP/1.1 404 Not Found");
                         break;           
                 }
@@ -57,17 +59,13 @@ switch ($r=array_shift($request)){
                 exit;
 }
 
-function handle_repo($method){
-        if($method=='POST'){
-                reset_repository();             
-        }else{
-                header('HTPP/1.1 405 Method Not Allowed');
-        }
-}
+
 
 function handle_repoR($method){
         if($method=='GET'){
                 show_repositoryR();
+        }else if($method=='POST'){
+                reset_repositoryR();
         }else{
                 header('HTPP/1.1 405 Method Not Allowed');
         }
@@ -76,6 +74,8 @@ function handle_repoR($method){
 function handle_repoB($method){
         if($method=='GET'){
                 show_repositoryB();
+        }else if($method=='POST'){
+                reset_repositoryB();
         }else{
                 header('HTPP/1.1 405 Method Not Allowed');
         }

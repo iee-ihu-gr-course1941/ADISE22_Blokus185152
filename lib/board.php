@@ -110,13 +110,22 @@ function reset_board(){
     show_board();
 }
 
-function reset_repository(){
+function reset_repositoryR(){
     global $mysqli;
 
-    $sql = 'call full_repositories()';
+    $sql = 'call full_repositoriesR()';
     $mysqli->query($sql);
 
 	show_repositoryR();
+	
+}
+
+function reset_repositoryB(){
+    global $mysqli;
+
+    $sql = 'call full_repositoriesB()';
+    $mysqli->query($sql);
+
     show_repositoryB();
 	
 }
