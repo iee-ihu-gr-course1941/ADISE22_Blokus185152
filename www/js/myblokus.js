@@ -1,6 +1,8 @@
 var me={token:null,piece_color:null};
 var game_status={};
 var board={};
+var repositoryR={};
+var repositoryB={};
 var last_update=new Date().getTime();
 var timer=null;
 
@@ -13,7 +15,8 @@ $(function () {
 	$('#blokus_login').click( login_to_game);
 	draw_empty_RepoR(null);
 	draw_empty_RepoB(null);
-	//fill_RED_tables();
+	fill_RED_tables();
+	fill_BLUE_tables();
 });
 
 function draw_empty_board(p) {
@@ -68,6 +71,22 @@ function fill_board() {
 	$.ajax(
         {url: "blokus.php/board/",
         success: fill_board_by_data }
+        );
+	
+}
+
+function fill_RED_tables() {
+	$.ajax(
+		{url: "blokus.php/repository/R", 
+		success: fill_RED_repo_by_data }
+		);
+	
+}
+
+function fill_BLUE_tables() {
+	$.ajax(
+        {url: "blokus.php/repository/B",
+        success: fill_BLUE_repo_by_data }
         );
 	
 }
@@ -188,6 +207,8 @@ function move_result(data){
 // }
 
 function fill_board_by_data(data) {
+	console.log("board");
+	console.log(data);
 	board=data;
 	for(var i=0;i<data.length;i++) {
 		var o = data[i];
@@ -216,21 +237,31 @@ function fill_board_by_data(data) {
 	// }
 }
 
-function fill_RED_tables() {
-	$.ajax({url: "blokus.php/repository/R", success: fill_RED_repo_by_data });
-	
-}
-
-function fill_RED_repo_by_data(datass) {
-	console.log(datass);
-	for(var i=1;i<datass.length+1;i++) {
+function fill_RED_repo_by_data(dataR) {
+	repositoryR=dataR;
+	console.log("repositoryR");
+	console.log(repositoryR);
+	for(var i=1;i<dataR.length+1;i++) {
 		
-		var o = datass[i-1];
+		var o = dataR[i-1];
 		var id = '#REDsquare_'+i;
-		var c = (o.piece_shape!=null)?o.piece_shape:'';
-		//var im = (o.piece_shape!=null)?'<img class="piece" src="images/'+c+'.png">':'';
+		var c = (o.piece_shape!=null)?o.piece_shape :'';
 		$(id).addClass(o.piece_shape+'_REDsquare').html(c);
 		
+		
+	}
+}
+
+function fill_BLUE_repo_by_data(dataB) {
+	console.log("repositoryB");
+	console.log(dataB);
+	repositoryR=dataB;
+	for(var i=1;i<dataB.length+1;i++) {
+
+		var o = dataB[i-1];
+		var id = '#BLUEsquare_'+i;
+		var c = (o.piece_shape!=null)?o.piece_shape :'';
+		$(id).addClass(o.piece_shape+'_BLUEsquare').html(c);
 	}
 	
 }
