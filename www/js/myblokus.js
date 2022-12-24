@@ -6,13 +6,15 @@ var repositoryB={};
 var last_update=new Date().getTime();
 var timer=null;
 
-
 $(function () {
 	draw_empty_board(null);
     fill_board();
 	//console.log("aaa");
     $('#blokus_reset').click(reset_board);
-	$('#blokus_login').click( login_to_game);
+	$('#blokus_login').click(login_to_game);
+	$('#move_div').hide(1000);
+	$('#do_move').click(do_move);
+	$('#do_move2').click( do_move2);
 	draw_empty_RepoR(null);
 	draw_empty_RepoB(null);
 	fill_RED_tables();
@@ -53,6 +55,9 @@ function draw_empty_RepoR(p) {
 	$('#blokus_repoR').html(t);
 	//$('.blokus_square').click(click_on_piece);
 }
+
+
+
 
 function draw_empty_RepoB(p) {
 	var t='<table id="repo_Blue_table">';
@@ -114,7 +119,7 @@ function login_result(data) {
 	$('#game_initializer').hide();
 	update_info();
 	game_status_update();
-	console.log("bbbb");
+
 }
 
 function login_error(data,y,z,c) {
@@ -151,7 +156,9 @@ function update_status(data) {
 }
 
 function update_info(){
-	$('#game_info').html("I am Player: "+me.piece_color+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.p_turn+' must play now.');	
+	$('#game_info').html("I am Player: "+me.piece_color+", my name is "+me.username +'<br>Token='+me.token+'<br>Game state: '+game_status.status+', '+ game_status.p_turn+' must play now.');
+	
+	
 }
 
 function reset_board() {
@@ -180,15 +187,22 @@ function reset_repositorysB() {
 }
 
 
+
+function do_move2() {
+	$('#the_move').val($('#the_move_src').val() +' ' + $('#the_move_dest').val());
+	$('.chess_square').removeClass('pmove').removeClass('tomove');
+	do_move();
+}
+
 function do_move() {
 	var s = $('#the_move').val();
 	
 	var a = s.trim().split(/[ ]+/);
 	if(a.length!=4) {
-		alert('Must give 4 numbers');
+		alert('first is the color, second is the piece and third - forth is the position');
 		return;
 	}
-	$.ajax({url: "blokus.php/board/piece_shepe/"+a[0]+'/'+a[1], 
+	$.ajax({url: "blokus.php/board/piece/"+a[0]+'/'+a[1], 
 			method: 'PUT',
 			dataType: "json",
 			contentType: 'application/json',
@@ -201,8 +215,13 @@ function do_move() {
 
 function move_result(data){
 	game_status_update();
+	fill_RED_tables();
+	fill_BLUE_tables();
 	fill_board_by_data(data);
+	
+	
 }
+
 
 function fill_board_by_data(data) {
 	console.log("board");
@@ -246,6 +265,12 @@ function fill_BLUE_repo_by_data(dataB) {
 		$(id).addClass(o.piece_shape+'_BLUEsquare').html(c);
 	}
 	
+}
+
+function fill_check_by_data(dataB) {
+	console.log("CHECK ----------------------------------------------------------------------------");
+	console.log(dataB);
+
 }
 
 

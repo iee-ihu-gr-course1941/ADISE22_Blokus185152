@@ -12,12 +12,14 @@ $input = json_decode(file_get_contents('php://input'),true);
 
 if($input==null) {
         $input=[];
+        
 }
 if(isset($_SERVER['HTTP_X_TOKEN'])) {
         $input['token']=$_SERVER['HTTP_X_TOKEN'];
 } else {
         $input['token']='';
 }
+
 
 
 switch ($r=array_shift($request)){
@@ -40,6 +42,8 @@ switch ($r=array_shift($request)){
                         break;
                         case 'B': handle_repoB($method);
                         break;
+                        case 'checkrepo': handle_checks($method, $request[0],$input);
+                        break;   
                         // case 'RR': handle_repoRR($method);
                         // break;
                         // case 'BR': handle_repoBR($method);
@@ -49,14 +53,24 @@ switch ($r=array_shift($request)){
                 }
                 break;        
         case 'status':
-                if(sizeof($request)==0){handle_status($method);}
-                else{header("HTTP/1.1 404 Not Found");}
-                break;
+                if(sizeof($request)==0) {handle_status($method);}
+		else {header("HTTP/1.1 404 Not Found");}
+		break;
         case 'players':
                 handle_player($method,$request,$input);
-                break;
+                break;     
         default: header("HTTP/1.1 404 Not Found");
                 exit;
+}
+
+
+
+function handle_checks($method,$shape){
+        if($method=='GET'){
+                read_repositoryR($shape);
+        }else{
+                header('HTPP/1.1 405 Method Not Allowed');
+        }
 }
 
 
@@ -70,6 +84,9 @@ function handle_repoR($method){
                 header('HTPP/1.1 405 Method Not Allowed');
         }
 }
+
+
+
 
 function handle_repoB($method){
         if($method=='GET'){
@@ -92,11 +109,11 @@ function handle_board($method){
         }
 }
 
-function handle_piece($method,$x,$y,$input){
+function handle_piece($method,$clr,$shape,$input){
         if($method=='GET') {
-                show_piece($x,$y);
+                show_piece($clr,$shape);
         } else if ($method=='PUT') {
-                move_piece($x,$y,$input['x'],$input['y'],  
+                move_piece($clr,$shape,$input['x'],$input['y'],  
                 $input['token']);
         }
 }

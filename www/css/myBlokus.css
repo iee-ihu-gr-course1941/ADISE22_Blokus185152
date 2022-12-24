@@ -1,10 +1,10 @@
-#blokus_table TD {width: 2em; height:2em;border:1px solid black;text-align:center;}
+#blokus_table TD {width: 2em; height:2em;border:2px solid black;text-align:center;}
 #blokus_table {border-collapse: collapse;}
 
-#repo_Red_table TD {width: 2em; height:2em;border:1px solid black;text-align:center;}
+#repo_Red_table TD {width: 2em; height:2em;border:2px solid rgb(184, 4, 4);text-align:center;}
 #repo_Red_table {border-collapse: collapse;} 
 
-#repo_Blue_table TD {width: 2em; height:2em;border:1px solid black;text-align:center;}
+#repo_Blue_table TD {width: 2em; height:2em;border:2px solid rgb(4, 10, 160);text-align:center;}
 #repo_Blue_table {border-collapse: collapse;} 
 
 TD.B_square {background-color:rgba(48, 38, 190, 0.573);}

@@ -11,7 +11,7 @@ function show_piece($x,$y) {
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 }
 
-function move_piece($x,$y,$x2,$y2,$token) {
+function move_piece($clr,$shape,$x2,$y2,$token) {
 	
 	if($token==null || $token=='') {
 		header("HTTP/1.1 400 Bad Request");
@@ -35,21 +35,26 @@ function move_piece($x,$y,$x2,$y2,$token) {
 		header("HTTP/1.1 400 Bad Request");
 		print json_encode(['errormesg'=>"It is not your turn."]);
 		exit;
-	}
-	$orig_board=read_board();
-	$board=convert_board($orig_board);
-	$n = add_valid_moves_to_piece($board,$color,$x,$y);
-	if($n==0) {
-		header("HTTP/1.1 400 Bad Request");
-		print json_encode(['errormesg'=>"This piece cannot move."]);
-		exit;
-	}
-	foreach($board[$x][$y]['moves'] as $i=>$move) {
-		if($x2==$move['x'] && $y2==$move['y']) {
-			do_move($x,$y,$x2,$y2);
-			exit;
+	}else{
+	    if ($color==$clr){
+			$oksall=Exist($clr,$shape);
+			if($oksall==1){
+				$lst =add_valid_moves_to_piece($shape);
+				$leng=sizeof($lst);
+				foreach($lst as list($a,$b)){
+					do_move($clr,$shape,$x2+$a,$y2+$b);
+				}	
+				exit;
+			}else{
+				$o=$oksall;
+				header("HTTP/1.1 400 Bad Request");
+				print json_encode(['errormesg'=>$o]);
+				exit;
+			}
 		}
 	}
+
+
 	header("HTTP/1.1 400 Bad Request");
 	print json_encode(['errormesg'=>"This move is illegal."]);
 	exit;
@@ -86,6 +91,21 @@ function show_repositoryR(){
 
 }
 
+function read_repositoryR($schm) {
+
+	global $mysqli;
+	
+	$sql = 'select val from red_repository where piece_shape=?';
+	$st = $mysqli->prepare($sql);
+
+	$st->bind_param('s',$schm);
+	$st->execute();
+	$res = $st->get_result();
+
+	return($res->fetch_all(MYSQLI_ASSOC));
+
+}
+
 function show_repositoryB(){
 	
 	global $mysqli;
@@ -100,6 +120,32 @@ function show_repositoryB(){
 	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
 
 }
+
+function read_repositoryB($schm2) {
+
+	global $mysqli;
+	
+	$sql = 'select val from blue_repository where piece_shape=?';
+	$st = $mysqli->prepare($sql);
+	
+	$st->bind_param('s',$schm2);
+	$st->execute();
+	$res = $st->get_result();
+
+	header('Content-type: application/json');
+	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+}
+
+// function checksALL(){
+//     global $mysqli;
+
+//     $sql = 'call full_repositoriesR()';
+//     $mysqli->query($sql);
+
+// 	show_repositoryR();
+	
+// }
+
 
 function reset_board(){
     global $mysqli;
@@ -147,6 +193,14 @@ function convert_board(&$orig_board) {
 	return($board);
 }
 
+function convert_repo(&$orig_board) {
+	$repo=[];
+	foreach($orig_board as $i=>&$row) {
+		$repo['val'] = &$row;
+	} 
+	return($repo);
+}
+
 
 function show_board_by_player($b) {
 
@@ -166,34 +220,14 @@ function show_board_by_player($b) {
 	print json_encode($orig_board, JSON_PRETTY_PRINT);
 }
 
-
-function add_valid_moves_to_piece(&$board,$b,$x,$y) {
+function add_valid_moves_to_board(&$board,$b) {
 	$number_of_moves=0;
-	if($board[$x][$y]['piece_color']==$b) {
-		switch($board[$x][$y]['piece_shape']){
-			case 'A': $number_of_moves+=A_moves($board,$b,$x,$y);break;
-			case 'B': $number_of_moves+=B_moves($board,$b,$x,$y);break;
-			case 'C': $number_of_moves+=C_moves($board,$b,$x,$y);break;
-			case 'D': $number_of_moves+=D_moves($board,$b,$x,$y);break;
-			case 'E': $number_of_moves+=E_moves($board,$b,$x,$y);break;
-			case 'F': $number_of_moves+=F_moves($board,$b,$x,$y);break;
-			case 'G': $number_of_moves+=G_moves($board,$b,$x,$y);break;
-			case 'H': $number_of_moves+=H_moves($board,$b,$x,$y);break;
-			case 'I': $number_of_moves+=I_moves($board,$b,$x,$y);break;
-			case 'J': $number_of_moves+=J_moves($board,$b,$x,$y);break;
-			case 'K': $number_of_moves+=K_moves($board,$b,$x,$y);break;
-			case 'L': $number_of_moves+=L_moves($board,$b,$x,$y);break;
-			case 'M': $number_of_moves+=M_moves($board,$b,$x,$y);break;
-			case 'N': $number_of_moves+=N_moves($board,$b,$x,$y);break;
-			case 'O': $number_of_moves+=O_moves($board,$b,$x,$y);break;
-			case 'P': $number_of_moves+=P_moves($board,$b,$x,$y);break;
-			case 'Q': $number_of_moves+=Q_moves($board,$b,$x,$y);break;
-			case 'R': $number_of_moves+=R_moves($board,$b,$x,$y);break;
-			case 'S': $number_of_moves+=S_moves($board,$b,$x,$y);break;
-			case 'T': $number_of_moves+=T_moves($board,$b,$x,$y);break;
-			case 'U': $number_of_moves+=U_moves($board,$b,$x,$y);break;
+	
+	for($x=1;$x<21;$x++) {
+		for($y=1;$y<21;$y++) {
+			$number_of_moves+=add_valid_moves_to_piece($board,$b,$x,$y);
 		}
-	} 
+	}
 	return($number_of_moves);
 }
 
@@ -201,40 +235,223 @@ function add_valid_moves_to_piece(&$board,$b,$x,$y) {
 
 
 
-function A_moves(&$board,$b,$x,$y) {
-	$m = [
-		[1,1],
-		[1,-1], 
-		[-1,1],
-		[-1,-1],
-	];
-	$moves=[];
-	foreach($m as $k=>$t) {
-		$x2=$x+$t[0];
-		$y2=$y+$t[1];
-		if( $x2>=1 && $x2<20 && $y2>=1 && $y2<=20 &&
-			$board[$x2][$y2]['piece_color'] !='R' && $board[$x2][$y2]['piece_color'] !='B') {
-			// Αν ο προορισμός είναι εντός σκακιέρας και δεν υπάρχει χρωμα μπλε η κοκκινο
-			$move=['xΑ'=>$x2, 'yΑ'=>$y2];
-			$moves[]=$move;
+
+
+
+
+
+function add_valid_moves_to_piece($shape) {
+		switch($shape){
+			case 'A': $direction=A_moves();break;
+			case 'B': $direction=B_moves();break;
+			case 'C': $direction=C_moves();break;
+			case 'D': $direction=D_moves();break;
+			case 'E': $direction=E_moves();break;
+			case 'F': $direction=F_moves();break;
+			case 'G': $direction=G_moves();break;
+			case 'H': $direction=H_moves();break;
+			case 'I': $direction=I_moves();break;
+			case 'J': $direction=J_moves();break;
+			case 'K': $direction=K_moves();break;
+			case 'L': $direction=L_moves();break;
+			case 'M': $direction=M_moves();break;
+			case 'N': $direction=N_moves();break;
+			case 'O': $direction=O_moves();break;
+			case 'P': $direction=P_moves();break;
+			case 'Q': $direction=Q_moves();break;
+			case 'R': $direction=R_moves();break;
+			case 'S': $direction=S_moves();break;
+			case 'T': $direction=T_moves();break;
+			case 'U': $direction=U_moves();break;
 		}
-	}
-	$board[$x][$y]['moves'] = $moves;
-	return(sizeof($moves));
+	return($direction);
 }
 
-function B_moves(&$board,$b,$x,$y) {
-	$direction=($b=='W')?1:-1;
-	$moves=[];
+//na tsekarei an to sxima uparxei sto table repository
+// apagoreuetai na ena koutaki na exei to idio xrwma kai diaforetiko sxima apo panw katw deksia kai aristera tou diladi
+//[0,+1],[+1,0],[0,-1],[-1,0]
+//episis tha pareis to megethos tou pioniou kai analoga tis epanalipseis tha eksetazeis kathe periptwsi an se ekeino to simeio uparxei pioni me diaforetiko xrwma
 
-	if($board[$x][$y+$direction]['piece_color']=='W' ) {
-		$move=['x'=>$x, 'y'=>$y+$direction];
-		$moves[]=$move;
 
+
+//CHECK an uparxei to sxima red kathigiti   [{"val":"R"}]
+
+function Exist($clr,$sch){
+	$ok=0;
+	$ts= [];
+	if($clr=='R'){
+		$ts=read_repositoryR($sch);
+	}else if($clr=='B'){
+		;
+	//$repo=read_repositoryB($sch);
 	}
-	$board[$x][$y]['moves'] = $moves;
-	return(sizeof($moves));
+	//&& $orig_rep[0]!='W'
+	if($ts=='R'){
+		$ok=1;
+	}else{
+		$ok=1;
+	}
+	return ($ok);
 }
+
+
+
+
+function A_moves() {
+	$directions = [
+		[0,0]
+	];
+
+	return($directions);
+}
+function B_moves() {
+	$directions = [
+		[0,0],[0,1]
+	];
+
+	return($directions);
+}
+
+function C_moves() {
+	$directions = [
+		[0,0], [0,1], [0,-1]
+	];
+
+	return($directions);
+}
+function D_moves() {
+	$directions = [
+		[0,0], [1,0], [0,-1]
+	];
+
+	return($directions);
+}
+function E_moves() {
+	$directions = [
+		[0,0], [0,1], [0,2], [0,-1]
+	];
+
+	return($directions);
+}
+function F_moves() {
+	$directions = [
+		[0,0], [0,-1], [0,1], [-1,1]
+	];
+
+	return($directions);
+}
+function G_moves() {
+	$directions = [
+		[0,0], [1,0], [0,1], [0,-1]
+	];
+
+	return($directions);
+}
+function H_moves() {
+	$directions = [
+		[0,0], [1,0], [0,1], [1,1]
+	];
+
+	return($directions);
+}
+function I_moves() {
+	$directions = [
+		[-1,0], [0,0], [0,1], [1,1]
+	];
+
+	return($directions);
+}
+function J_moves() {
+	$directions = [
+		[0,0], [0,1], [0,2], [0,-1], [0,-2]
+	];
+
+	return($directions);
+}
+function K_moves() {
+	$directions = [
+		[0,0], [0,1], [0,-2], [0,-1], [-1,1]
+	];
+
+	return($directions);
+}
+function L_moves() {
+	$directions = [
+		[0,-2], [0,-1], [0,0], [-1,0], [-1,1]
+	];
+
+	return($directions);
+}
+function M_moves() {
+	$directions = [
+		[0,-1], [-1,0], [0,0], [-1,1], [0,1]
+	];
+
+	return($directions);
+}
+function N_moves() {
+	$directions = [
+		[0,0], [0,1], [-1,1], [0,-1], [-1,-1]
+	];
+
+	return($directions);
+}
+function O_moves() {
+	$directions = [
+		[0,-1], [0,0], [1,0], [0,1], [0,2]
+	];
+
+	return($directions);
+}
+function P_moves() {
+	$directions = [
+		[0,0], [0,-1], [0,1], [-1,1], [1,1]
+	];
+
+	return($directions);
+}
+function Q_moves() {
+	$directions = [
+		[0,0], [1,0], [2,0], [0,-1], [0,-2]
+	];
+
+	return($directions);
+}
+function R_moves() {
+	$directions = [
+		[0,0], [1,0], [1,1], [0,-1], [-1,-1]
+	];
+
+	return($directions);
+}
+function S_moves() {
+	$directions = [
+		[0,0], [1,0], [1,1], [-1,0], [-1,-1]
+	];
+
+	return($directions);
+}
+function T_moves() {
+	$directions = [
+		[-1,-1], [-1,0], [0,0], [1,0], [0,1]
+	];
+
+	return($directions);
+}
+function U_moves() {
+	$directions = [
+		[0,0], [1,0], [0,1], [-1,0], [0,-1]
+	];
+
+	return($directions);
+}
+
+
+
+
+
+
+
 
 
 // class BlokuSet
@@ -269,16 +486,11 @@ function B_moves(&$board,$b,$x,$y) {
 
 
 
-
-
-
-
-
-function do_move($x,$y,$x2,$y2) {
+function do_move($clr,$shape,$x2,$y2) {
 	global $mysqli;
 	$sql = 'call `move_piece`(?,?,?,?);';
 	$st = $mysqli->prepare($sql);
-	$st->bind_param('iiii',$x,$y,$x2,$y2 );
+	$st->bind_param('ssii',$clr,$shape,$x2,$y2 );
 	$st->execute();
 
 	header('Content-type: application/json');

@@ -148,8 +148,8 @@ DROP TABLE IF EXISTS `game_status`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `game_status` (
   `status` enum('not active','initialized','started','ended','aborded') NOT NULL DEFAULT 'not active',
-  `p_turn` enum('W','B') DEFAULT NULL,
-  `result` enum('B','W','D') DEFAULT NULL,
+  `p_turn` enum('R','B') DEFAULT NULL,
+  `result` enum('B','R','D') DEFAULT NULL,
   `last_change` timestamp NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -160,7 +160,7 @@ CREATE TABLE `game_status` (
 
 LOCK TABLES `game_status` WRITE;
 /*!40000 ALTER TABLE `game_status` DISABLE KEYS */;
-INSERT INTO `game_status` VALUES ('started','','D','2022-12-20 18:47:47');
+INSERT INTO `game_status` VALUES ('started','R','D','2022-11-28 16:39:59');
 /*!40000 ALTER TABLE `game_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -223,4 +223,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-20 20:50:18
+-- Dump completed on 2022-12-21 20:46:21
