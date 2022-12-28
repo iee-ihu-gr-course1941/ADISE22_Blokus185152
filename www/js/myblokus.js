@@ -5,6 +5,7 @@ var repositoryR={};
 var repositoryB={};
 var last_update=new Date().getTime();
 var timer=null;
+var ok=0;
 
 $(function () {
 	draw_empty_board(null);
@@ -95,6 +96,21 @@ function fill_BLUE_tables() {
         );
 	
 }
+
+function check_tables(clr) {
+    if(clr=='R'){
+	$.ajax(
+		{url: "blokus.php/repository/R", 
+		success: check_repo_by_data }
+		);
+	}else if(clr=='B'){
+	$.ajax(
+		{url: "blokus.php/repository/B", 
+		success: check_repo_by_data }
+		);	
+	}
+}
+
 
 function login_to_game() {
 	if($('#username').val()=='') {
@@ -194,6 +210,14 @@ function do_move2() {
 	do_move();
 }
 
+function getschm(){
+	var s = $('#the_move').val();
+	var a = s.trim().split(/[ ]+/);
+	console.log("----------> a[1] : ");
+	console.log(a[1]);
+	return(a[1]);
+}
+
 function do_move() {
 	var s = $('#the_move').val();
 	
@@ -201,25 +225,23 @@ function do_move() {
 	if(a.length!=4) {
 		alert('first is the color, second is the piece and third - forth is the position');
 		return;
+	}else{
+		if(a[0]=='R'){
+            clr='R';
+			check_tables(clr);
+		}else if(a[0]=='B'){
+			clr='B';
+			check_tables(clr);
+		}
 	}
-	$.ajax({url: "blokus.php/board/piece/"+a[0]+'/'+a[1], 
-			method: 'PUT',
-			dataType: "json",
-			contentType: 'application/json',
-			data: JSON.stringify( {x: a[2], y: a[3]}),
-			headers: {"X-Token": me.token},
-			success: move_result,
-			error: login_error});
 	
 }
 
 function move_result(data){
 	game_status_update();
+	fill_board_by_data(data);
 	fill_RED_tables();
 	fill_BLUE_tables();
-	fill_board_by_data(data);
-	
-	
 }
 
 
@@ -265,6 +287,43 @@ function fill_BLUE_repo_by_data(dataB) {
 		$(id).addClass(o.piece_shape+'_BLUEsquare').html(c);
 	}
 	
+}
+
+function check_repo_by_data(dataAll) {
+	console.log("checking EFTASES EDW , kalestike diladi i check repo by data kai parakatw emfanizei to repository pou zitises");
+	console.log(dataAll);
+	repo=dataAll;
+	ok=0;
+	schm=getschm();
+	var s = $('#the_move').val();
+	var a = s.trim().split(/[ ]+/);
+	for(var i=1;i<dataAll.length+1;i++) {
+		var o = dataAll[i-1];
+		if(o.val=='B'){
+			console.log("kalase to B ");
+		}else if(o.val=='R'){
+            console.log("kalase to A ");
+		}
+		if(o.val=='W' && schm==o.piece_shape){
+			ok=1;
+			console.log("molis egine 1 to ok");
+		}
+	}
+	console.log("To ok einai = ");
+	console.log(ok);
+	if(ok==1){
+		console.log("Den uparxei sto repository to sxima auto");
+		alert('Illegal move, '+schm+' has already been used!');
+	}else{
+		$.ajax({url: "blokus.php/board/piece/"+a[0]+'/'+a[1], 
+		method: 'PUT',
+		dataType: "json",
+		contentType: 'application/json',
+		data: JSON.stringify( {x: a[2], y: a[3]}),
+		headers: {"X-Token": me.token},
+		success: move_result,
+		error: login_error});
+	}
 }
 
 function fill_check_by_data(dataB) {

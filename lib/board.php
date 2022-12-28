@@ -1,7 +1,8 @@
 <?php
+
 function show_piece($x,$y) {
 	global $mysqli;
-	
+
 	$sql = 'select * from board where x=? and y=?';
 	$st = $mysqli->prepare($sql);
 	$st->bind_param('ii',$x,$y);
@@ -12,7 +13,7 @@ function show_piece($x,$y) {
 }
 
 function move_piece($clr,$shape,$x2,$y2,$token) {
-	
+
 	if($token==null || $token=='') {
 		header("HTTP/1.1 400 Bad Request");
 		print json_encode(['errormesg'=>"token is not set."]);
@@ -36,25 +37,23 @@ function move_piece($clr,$shape,$x2,$y2,$token) {
 		print json_encode(['errormesg'=>"It is not your turn."]);
 		exit;
 	}else{
-	    if ($color==$clr){
-			$oksall=Exist($clr,$shape);
-			if($oksall==1){
+	    if ($color==$clr){ 
 				$lst =add_valid_moves_to_piece($shape);
-				$leng=sizeof($lst);
-				foreach($lst as list($a,$b)){
-					do_move($clr,$shape,$x2+$a,$y2+$b);
+				$okfuture=check_future_positions($clr,$lst,$x2,$y2,$shape);
+				//$okcorrent=check_corrent_positions($clr,$x2,$y2);
+				$okcorrent=0;
+				if($okfuture==0&&$okcorrent==0){
+					foreach($lst as list($a,$b)){
+						do_move($clr,$shape,$x2+$a,$y2+$b);
+					}
+				}else{
+					header("HTTP/1.1 400 Bad Request");
+					print json_encode(['errormesg'=>"This move is illegal."]);
+					exit;
 				}	
-				exit;
-			}else{
-				$o=$oksall;
-				header("HTTP/1.1 400 Bad Request");
-				print json_encode(['errormesg'=>$o]);
-				exit;
-			}
+			
 		}
 	}
-
-
 	header("HTTP/1.1 400 Bad Request");
 	print json_encode(['errormesg'=>"This move is illegal."]);
 	exit;
@@ -92,18 +91,13 @@ function show_repositoryR(){
 }
 
 function read_repositoryR($schm) {
-
 	global $mysqli;
-	
 	$sql = 'select val from red_repository where piece_shape=?';
 	$st = $mysqli->prepare($sql);
-
 	$st->bind_param('s',$schm);
 	$st->execute();
 	$res = $st->get_result();
-
 	return($res->fetch_all(MYSQLI_ASSOC));
-
 }
 
 function show_repositoryB(){
@@ -122,18 +116,13 @@ function show_repositoryB(){
 }
 
 function read_repositoryB($schm2) {
-
 	global $mysqli;
-	
 	$sql = 'select val from blue_repository where piece_shape=?';
 	$st = $mysqli->prepare($sql);
-	
 	$st->bind_param('s',$schm2);
 	$st->execute();
 	$res = $st->get_result();
-
-	header('Content-type: application/json');
-	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+	return($res->fetch_all(MYSQLI_ASSOC));
 }
 
 // function checksALL(){
@@ -196,7 +185,7 @@ function convert_board(&$orig_board) {
 function convert_repo(&$orig_board) {
 	$repo=[];
 	foreach($orig_board as $i=>&$row) {
-		$repo['val'] = &$row;
+		$repo[$row['piece_shape']][$row['val']] = &$row;
 	} 
 	return($repo);
 }
@@ -209,13 +198,13 @@ function show_board_by_player($b) {
 	$orig_board=read_board();
 	$board=convert_board($orig_board);
 	$status = read_status();
-	if($status['status']=='started' && $status['p_turn']==$b && $b!=null) {
-		// It my turn !!!!
-		$n = add_valid_moves_to_board($board,$b);
+	// if($status['status']=='started' && $status['p_turn']==$b && $b!=null) {
+	// 	// It my turn !!!!
+	// 	$n = add_valid_moves_to_board($board,$b);
 		
-		// Εάν n==0, τότε έχασα !!!!!
-		// Θα πρέπει να ενημερωθεί το game_status.
-	}
+	// 	// Εάν n==0, τότε έχασα !!!!!
+	// 	// Θα πρέπει να ενημερωθεί το game_status.
+	// }
 	header('Content-type: application/json');
 	print json_encode($orig_board, JSON_PRETTY_PRINT);
 }
@@ -277,20 +266,87 @@ function add_valid_moves_to_piece($shape) {
 //CHECK an uparxei to sxima red kathigiti   [{"val":"R"}]
 
 function Exist($clr,$sch){
-	$ok=0;
-	$ts= [];
+	$ok=1;
 	if($clr=='R'){
-		$ts=read_repositoryR($sch);
+		$repo=read_repositoryR($sch);
+		$kpop='W';
 	}else if($clr=='B'){
-		;
-	//$repo=read_repositoryB($sch);
+		$repo=read_repositoryB($sch);
+		$kpop='B';
 	}
-	//&& $orig_rep[0]!='W'
-	if($ts=='R'){
-		$ok=1;
-	}else{
-		$ok=1;
+	foreach($repo as list($a)){
+		if($a==$clr){
+			$ok=0;
+		}
 	}
+	return ($ok);
+}
+
+function check_future_positions($clr,$lst,$x2,$y2,$shape){
+	$ok=0;
+	$orig_board=read_board();
+	$board=convert_board($orig_board);
+	foreach($lst as list($a,$b)){
+		if(($x2+$a)>=1&&($x2+$a)<=20&&($y2+$b)>=1&&($y2+$b)<=20&&$board[$x2+$a][$y2+$b]['piece_color'] =='W'){
+			if(($x2+$a+1)>=1&&($x2+$a+1)<=20&&($y2+$b)>=1&&($y2+$b)<=20){
+				if($board[$x2+$a+1][$y2+$b]['piece_color'] !=$clr || ($board[$x2+$a+1][$y2+$b]['piece_color']==$clr && $board[$x2+$a+1][$y2+$b]['piece_shape'] ==$shape)){
+                    $nai=1;
+				}else{
+					$ok=1;
+				}
+			}
+			if(($x2+$a-1)>=1&&($x2+$a-1)<=20&&($y2+$b)>=1&&($y2+$b)<=20){
+				if(($board[$x2+$a-1][$y2+$b]['piece_color'] !=$clr || ($board[$x2+$a-1][$y2+$b]['piece_color']==$clr && $board[$x2+$a-1][$y2+$b]['piece_shape'] ==$shape))){
+                    $nai=1;
+				}else{
+					$ok=1;
+				}
+			}
+			if(($x2+$a)>=1&&($x2+$a)<=20&&($y2+$b+1)>=1&&($y2+$b+1)<=20){
+				if(($board[$x2+$a][$y2+$b+1]['piece_color'] !=$clr || ($board[$x2+$a][$y2+$b+1]['piece_color']==$clr && $board[$x2+$a][$y2+$b+1]['piece_shape'] ==$shape))){
+                    $nai=1;
+				}else{
+					$ok=1;
+				}
+			}
+			if(($x2+$a)>=1&&($x2+$a)<=20&&($y2+$b+1)>=1&&($y2+$b+1)<=20){
+				if(($board[$x2+$a][$y2+$b-1]['piece_color'] !=$clr || ($board[$x2+$a][$y2+$b-1]['piece_color']==$clr && $board[$x2+$a][$y2+$b-1]['piece_shape'] ==$shape))){
+                    $nai=1;
+				}else{
+					$ok=1;
+				}
+			}
+		}else{
+			$ok=1;
+		} 
+	}
+	return ($ok);
+}
+
+
+function check_corrent_positions($clr,$x2,$y2,){
+	$ok=1;
+	$orig_board=read_board();
+	$board=convert_board($orig_board);
+	if($clr=='R' && $x2==5 && $y2==5 ){
+		$ok=0;
+	}
+	if($clr=='B' && $x2==15 && $y2==15 ){
+		$ok=0;
+	}
+    if($board[$x2+1][$y2+1]['piece_color']==$clr){
+		$ok=0;
+	}
+	if($board[$x2-1][$y2-1]['piece_color']==$clr){
+		$ok=0;
+	}
+	if($board[$x2+1][$y2-1]['piece_color']==$clr){
+		$ok=0;
+	}
+	if($board[$x2-1][$y2+1]['piece_color']==$clr){
+		$ok=0;
+	}
+	
 	return ($ok);
 }
 
@@ -488,7 +544,7 @@ function U_moves() {
 
 function do_move($clr,$shape,$x2,$y2) {
 	global $mysqli;
-	$sql = 'call `move_piece`(?,?,?,?);';
+	$sql = 'call move_piece(?,?,?,?);';
 	$st = $mysqli->prepare($sql);
 	$st->bind_param('ssii',$clr,$shape,$x2,$y2 );
 	$st->execute();
