@@ -13,7 +13,6 @@ function show_piece($x,$y) {
 }
 
 function move_piece($clr,$shape,$x2,$y2,$token) {
-
 	if($token==null || $token=='') {
 		header("HTTP/1.1 400 Bad Request");
 		print json_encode(['errormesg'=>"token is not set."]);
@@ -39,19 +38,27 @@ function move_piece($clr,$shape,$x2,$y2,$token) {
 	}else{
 	    if ($color==$clr){ 
 				$lst =add_valid_moves_to_piece($shape);
+				$checker='n';
+				$checksize=count($lst);
+				$ji=1;
 				$okfuture=check_future_positions($clr,$lst,$x2,$y2,$shape);
-				//$okcorrent=check_corrent_positions($clr,$x2,$y2);
-				$okcorrent=0;
+				$okcorrent=check_corrent_positions($clr,$lst,$x2,$y2,$shape);
 				if($okfuture==0&&$okcorrent==0){
 					foreach($lst as list($a,$b)){
-						do_move($clr,$shape,$x2+$a,$y2+$b);
+					 	if($checksize==$ji){
+					 		$checker='k';
+							do_move($clr,$shape,$x2+$a,$y2+$b,$checker);
+							exit;	
+						 }else{
+                            do_move($clr,$shape,$x2+$a,$y2+$b,$checker);
+						    $ji=$ji+1; 
+					    }	
 					}
 				}else{
 					header("HTTP/1.1 400 Bad Request");
 					print json_encode(['errormesg'=>"This move is illegal."]);
 					exit;
 				}	
-			
 		}
 	}
 	header("HTTP/1.1 400 Bad Request");
@@ -59,18 +66,16 @@ function move_piece($clr,$shape,$x2,$y2,$token) {
 	exit;
 }
 
-function show_board() {
-	
+function show_board($input) {
 	global $mysqli;
 	
-	$sql = 'select * from board';
-	$st = $mysqli->prepare($sql);
-
-	$st->execute();
-	$res = $st->get_result();
-
-	header('Content-type: application/json');
-	print json_encode($res->fetch_all(MYSQLI_ASSOC), JSON_PRETTY_PRINT);
+	$b=current_color($input['token']);
+	if($b) {
+		show_board_by_player($b);
+	} else {
+		header('Content-type: application/json');
+		print json_encode(read_board(), JSON_PRETTY_PRINT);
+	}
 
 }
 
@@ -141,8 +146,6 @@ function reset_board(){
 
     $sql = 'call clean_board()';
     $mysqli->query($sql);
-
-    show_board();
 }
 
 function reset_repositoryR(){
@@ -324,27 +327,29 @@ function check_future_positions($clr,$lst,$x2,$y2,$shape){
 }
 
 
-function check_corrent_positions($clr,$x2,$y2,){
+function check_corrent_positions($clr,$lst,$x2,$y2,$shape){
 	$ok=1;
 	$orig_board=read_board();
 	$board=convert_board($orig_board);
-	if($clr=='R' && $x2==5 && $y2==5 ){
-		$ok=0;
-	}
-	if($clr=='B' && $x2==15 && $y2==15 ){
-		$ok=0;
-	}
-    if($board[$x2+1][$y2+1]['piece_color']==$clr){
-		$ok=0;
-	}
-	if($board[$x2-1][$y2-1]['piece_color']==$clr){
-		$ok=0;
-	}
-	if($board[$x2+1][$y2-1]['piece_color']==$clr){
-		$ok=0;
-	}
-	if($board[$x2-1][$y2+1]['piece_color']==$clr){
-		$ok=0;
+	foreach($lst as list($a,$b)){
+		if($clr=='R' && $x2+$a==5 && $y2+$b==5 ){
+			$ok=0;
+		}
+		if($clr=='B' && $x2+$a==15 && $y2+$b==15 ){
+			$ok=0;
+		}
+		if($board[$x2+$a+1][$y2+$b+1]['piece_color']==$clr&&$board[$x2+$a+1][$y2+$b+1]['piece_shape']!=$shape){
+			$ok=0;
+		}
+		if($board[$x2+$a-1][$y2+$b-1]['piece_color']==$clr&&$board[$x2+$a-1][$y2+$b-1]['piece_shape']!=$shape){
+			$ok=0;
+		}
+		if($board[$x2+$a+1][$y2+$b-1]['piece_color']==$clr&&$board[$x2+$a+1][$y2+$b-1]['piece_shape']!=$shape){
+			$ok=0;
+		}
+		if($board[$x2+$a-1][$y2+$b+1]['piece_color']==$clr&&$board[$x2+$a-1][$y2+$b+1]['piece_shape']!=$shape){
+			$ok=0;
+		}
 	}
 	
 	return ($ok);
@@ -542,11 +547,11 @@ function U_moves() {
 
 
 
-function do_move($clr,$shape,$x2,$y2) {
+function do_move($clr,$shape,$x2,$y2,$checker) {
 	global $mysqli;
-	$sql = 'call move_piece(?,?,?,?);';
+	$sql = 'call `move_piece`(?,?,?,?,?);';
 	$st = $mysqli->prepare($sql);
-	$st->bind_param('ssii',$clr,$shape,$x2,$y2 );
+	$st->bind_param('ssiis',$clr,$shape,$x2,$y2,$checker);
 	$st->execute();
 
 	header('Content-type: application/json');

@@ -7,8 +7,9 @@
 #repo_Blue_table TD {width: 2em; height:2em;border:2px solid rgb(4, 10, 160);text-align:center;}
 #repo_Blue_table {border-collapse: collapse;} 
 
-TD.B_square {background-color:rgba(48, 38, 190, 0.573);}
-TD.R_square {background-color:rgba(230, 23, 23, 0.473);}
+#square_15_15{background-color: rgba(4, 12, 170, 0.4);}
+#square_5_5{background-color: rgb(164, 3, 3, 0.4);}
+
 TD.W_square {background-color:rgba(0, 0, 0, 0.104);}
 
 TD._REDsquare {background-color:rgb(0, 0, 0);}

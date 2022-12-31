@@ -74,11 +74,9 @@ function draw_empty_RepoB(p) {
 }
 
 function fill_board() {
-	$.ajax(
-        {url: "blokus.php/board/",
-        success: fill_board_by_data }
-        );
-	
+        $.ajax({url: "blokus.php/board/", 
+		headers: {"X-Token": me.token},
+		success: fill_board_by_data });
 }
 
 function fill_RED_tables() {
@@ -268,8 +266,11 @@ function fill_RED_repo_by_data(dataR) {
 		
 		var o = dataR[i-1];
 		var id = '#REDsquare_'+i;
-		var c = (o.val!='W')?o.piece_shape :'';
-		$(id).addClass(o.piece_shape+'_REDsquare').html(c);
+		var c = (o.val!='W')?o.val+o.piece_shape:'';
+		//$(id).addClass(o.piece_shape+'_REDsquare').html(c);
+		var pc= (o.val!='W')?'piece_shape'+o.val:'';
+		var im = (o.val!='W')?'<img class="pieceR '+pc+'" src="images/'+c+'.PNG">':'';
+		$(id).addClass(o.piece_shape+'_square').html(im);
 		
 		
 	}
@@ -283,8 +284,12 @@ function fill_BLUE_repo_by_data(dataB) {
 
 		var o = dataB[i-1];
 		var id = '#BLUEsquare_'+i;
-		var c = (o.val!='W')?o.piece_shape :'';
-		$(id).addClass(o.piece_shape+'_BLUEsquare').html(c);
+		var c = (o.val!='W')?o.val+o.piece_shape:'';
+		//$(id).addClass(o.piece_shape+'_REDsquare').html(c);
+		var pc= (o.val!='W')?'piece_shape'+o.val:'';
+		//var im = (o.val!='W')?'<img class="pieceB '+pc+'" src="images/'+c+'.PNG">':'';
+		var im = (o.val!='W')?'<img class="pieceB '+pc+'" src="images/'+c+'.PNG">':'';
+		$(id).addClass(o.piece_shape+'_square').html(im);
 	}
 	
 }

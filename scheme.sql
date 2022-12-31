@@ -61,7 +61,7 @@ CREATE TABLE `board` (
 
 LOCK TABLES `board` WRITE;
 /*!40000 ALTER TABLE `board` DISABLE KEYS */;
-INSERT INTO `board` VALUES (1,1,'W',NULL),(1,2,'W',NULL),(1,3,'W',NULL),(1,4,'W',NULL),(1,5,'W',NULL),(1,6,'W',NULL),(1,7,'W',NULL),(1,8,'W',NULL),(1,9,'W',NULL),(1,10,'W',NULL),(1,11,'W',NULL),(1,12,'W',NULL),(1,13,'W',NULL),(1,14,'W',NULL),(1,15,'W',NULL),(1,16,'W',NULL),(1,17,'W',NULL),(1,18,'W',NULL),(1,19,'W',NULL),(1,20,'W',NULL),(2,1,'W',NULL),(2,2,'W',NULL),(2,3,'W',NULL),(2,4,'W',NULL),(2,5,'W',NULL),(2,6,'W',NULL),(2,7,'W',NULL),(2,8,'W',NULL),(2,9,'W',NULL),(2,10,'W',NULL),(2,11,'W',NULL),(2,12,'W',NULL),(2,13,'W',NULL),(2,14,'W',NULL),(2,15,'W',NULL),(2,16,'W',NULL),(2,17,'W',NULL),(2,18,'W',NULL),(2,19,'W',NULL),(2,20,'W',NULL),(3,1,'W',NULL),(3,2,'W',NULL),(3,3,'W',NULL),(3,4,'W',NULL),(3,5,'W',NULL),(3,6,'W',NULL),(3,7,'W',NULL),(3,8,'W',NULL),(3,9,'W',NULL),(3,10,'W',NULL),(3,11,'W',NULL),(3,12,'W',NULL),(3,13,'W',NULL),(3,14,'W',NULL),(3,15,'W',NULL),(3,16,'W',NULL),(3,17,'W',NULL),(3,18,'W',NULL),(3,19,'W',NULL),(3,20,'W',NULL),(4,1,'W',NULL),(4,2,'W',NULL),(4,3,'W',NULL),(4,4,'W',NULL),(4,5,'W',NULL),(4,6,'W',NULL),(4,7,'W',NULL),(4,8,'W',NULL),(4,9,'W',NULL),(4,10,'W',NULL),(4,11,'W',NULL),(4,12,'W',NULL),(4,13,'W',NULL),(4,14,'W',NULL),(4,15,'W',NULL),(4,16,'W',NULL),(4,17,'W',NULL),(4,18,'W',NULL),(4,19,'W',NULL),(4,20,'W',NULL),(5,1,'W',NULL),(5,2,'W',NULL),(5,3,'W',NULL),(5,4,'W',NULL),(5,5,'W',NULL),(5,6,'W',NULL),(5,7,'W',NULL),(5,8,'W',NULL),(5,9,'W',NULL),(5,10,'W',NULL),(5,11,'W',NULL),(5,12,'W',NULL),(5,13,'W',NULL),(5,14,'W',NULL),(5,15,'W',NULL),(5,16,'W',NULL),(5,17,'W',NULL),(5,18,'W',NULL),(5,19,'W',NULL),(5,20,'W',NULL),(6,1,'W',NULL),(6,2,'W',NULL),(6,3,'W',NULL),(6,4,'W',NULL),(6,5,'W',NULL),(6,6,'W',NULL),(6,7,'W',NULL),(6,8,'W',NULL),(6,9,'W',NULL),(6,10,'W',NULL),(6,11,'W',NULL),(6,12,'W',NULL),(6,13,'W',NULL),(6,14,'W',NULL),(6,15,'W',NULL),(6,16,'W',NULL),(6,17,'W',NULL),(6,18,'W',NULL),(6,19,'W',NULL),(6,20,'W',NULL),(7,1,'W',NULL),(7,2,'W',NULL),(7,3,'W',NULL),(7,4,'W',NULL),(7,5,'W',NULL),(7,6,'W',NULL),(7,7,'W',NULL),(7,8,'W',NULL),(7,9,'W',NULL),(7,10,'W',NULL),(7,11,'W',NULL),(7,12,'W',NULL),(7,13,'W',NULL),(7,14,'W',NULL),(7,15,'W',NULL),(7,16,'W',NULL),(7,17,'W',NULL),(7,18,'W',NULL),(7,19,'W',NULL),(7,20,'W',NULL),(8,1,'W',NULL),(8,2,'W',NULL),(8,3,'W',NULL),(8,4,'W',NULL),(8,5,'W',NULL),(8,6,'W',NULL),(8,7,'W',NULL),(8,8,'W',NULL),(8,9,'W',NULL),(8,10,'W',NULL),(8,11,'W',NULL),(8,12,'W',NULL),(8,13,'W',NULL),(8,14,'W',NULL),(8,15,'W',NULL),(8,16,'W',NULL),(8,17,'W',NULL),(8,18,'W',NULL),(8,19,'W',NULL),(8,20,'W',NULL),(9,1,'W',NULL),(9,2,'W',NULL),(9,3,'W',NULL),(9,4,'W',NULL),(9,5,'W',NULL),(9,6,'W',NULL),(9,7,'W',NULL),(9,8,'W',NULL),(9,9,'W',NULL),(9,10,'W',NULL),(9,11,'W',NULL),(9,12,'W',NULL),(9,13,'W',NULL),(9,14,'W',NULL),(9,15,'W',NULL),(9,16,'W',NULL),(9,17,'W',NULL),(9,18,'W',NULL),(9,19,'W',NULL),(9,20,'W',NULL),(10,1,'W',NULL),(10,2,'W',NULL),(10,3,'W',NULL),(10,4,'W',NULL),(10,5,'W',NULL),(10,6,'W',NULL),(10,7,'W',NULL),(10,8,'W',NULL),(10,9,'W',NULL),(10,10,'W',NULL),(10,11,'W',NULL),(10,12,'W',NULL),(10,13,'W',NULL),(10,14,'W',NULL),(10,15,'W',NULL),(10,16,'W',NULL),(10,17,'W',NULL),(10,18,'W',NULL),(10,19,'W',NULL),(10,20,'W',NULL),(11,1,'W',NULL),(11,2,'W',NULL),(11,3,'W',NULL),(11,4,'W',NULL),(11,5,'W',NULL),(11,6,'W',NULL),(11,7,'W',NULL),(11,8,'W',NULL),(11,9,'W',NULL),(11,10,'W',NULL),(11,11,'W',NULL),(11,12,'W',NULL),(11,13,'W',NULL),(11,14,'W',NULL),(11,15,'W',NULL),(11,16,'W',NULL),(11,17,'W',NULL),(11,18,'W',NULL),(11,19,'W',NULL),(11,20,'W',NULL),(12,1,'W',NULL),(12,2,'W',NULL),(12,3,'W',NULL),(12,4,'W',NULL),(12,5,'W',NULL),(12,6,'W',NULL),(12,7,'W',NULL),(12,8,'W',NULL),(12,9,'W',NULL),(12,10,'W',NULL),(12,11,'W',NULL),(12,12,'W',NULL),(12,13,'W',NULL),(12,14,'W',NULL),(12,15,'W',NULL),(12,16,'W',NULL),(12,17,'W',NULL),(12,18,'W',NULL),(12,19,'W',NULL),(12,20,'W',NULL),(13,1,'W',NULL),(13,2,'W',NULL),(13,3,'W',NULL),(13,4,'W',NULL),(13,5,'W',NULL),(13,6,'W',NULL),(13,7,'W',NULL),(13,8,'W',NULL),(13,9,'W',NULL),(13,10,'W',NULL),(13,11,'W',NULL),(13,12,'W',NULL),(13,13,'W',NULL),(13,14,'W',NULL),(13,15,'W',NULL),(13,16,'W',NULL),(13,17,'W',NULL),(13,18,'W',NULL),(13,19,'W',NULL),(13,20,'W',NULL),(14,1,'W',NULL),(14,2,'W',NULL),(14,3,'W',NULL),(14,4,'W',NULL),(14,5,'W',NULL),(14,6,'W',NULL),(14,7,'W',NULL),(14,8,'W',NULL),(14,9,'W',NULL),(14,10,'W',NULL),(14,11,'W',NULL),(14,12,'W',NULL),(14,13,'W',NULL),(14,14,'W',NULL),(14,15,'W',NULL),(14,16,'W',NULL),(14,17,'W',NULL),(14,18,'W',NULL),(14,19,'W',NULL),(14,20,'W',NULL),(15,1,'W',NULL),(15,2,'W',NULL),(15,3,'W',NULL),(15,4,'W',NULL),(15,5,'W',NULL),(15,6,'W',NULL),(15,7,'W',NULL),(15,8,'W',NULL),(15,9,'W',NULL),(15,10,'W',NULL),(15,11,'W',NULL),(15,12,'W',NULL),(15,13,'W',NULL),(15,14,'W',NULL),(15,15,'W',NULL),(15,16,'W',NULL),(15,17,'W',NULL),(15,18,'W',NULL),(15,19,'W',NULL),(15,20,'W',NULL),(16,1,'W',NULL),(16,2,'W',NULL),(16,3,'W',NULL),(16,4,'W',NULL),(16,5,'W',NULL),(16,6,'W',NULL),(16,7,'W',NULL),(16,8,'W',NULL),(16,9,'W',NULL),(16,10,'W',NULL),(16,11,'W',NULL),(16,12,'W',NULL),(16,13,'W',NULL),(16,14,'W',NULL),(16,15,'W',NULL),(16,16,'W',NULL),(16,17,'W',NULL),(16,18,'W',NULL),(16,19,'W',NULL),(16,20,'W',NULL),(17,1,'W',NULL),(17,2,'W',NULL),(17,3,'W',NULL),(17,4,'W',NULL),(17,5,'W',NULL),(17,6,'W',NULL),(17,7,'W',NULL),(17,8,'W',NULL),(17,9,'W',NULL),(17,10,'W',NULL),(17,11,'W',NULL),(17,12,'W',NULL),(17,13,'W',NULL),(17,14,'W',NULL),(17,15,'W',NULL),(17,16,'W',NULL),(17,17,'W',NULL),(17,18,'W',NULL),(17,19,'W',NULL),(17,20,'W',NULL),(18,1,'W',NULL),(18,2,'W',NULL),(18,3,'W',NULL),(18,4,'W',NULL),(18,5,'W',NULL),(18,6,'W',NULL),(18,7,'W',NULL),(18,8,'W',NULL),(18,9,'W',NULL),(18,10,'W',NULL),(18,11,'W',NULL),(18,12,'W',NULL),(18,13,'W',NULL),(18,14,'W',NULL),(18,15,'W',NULL),(18,16,'W',NULL),(18,17,'W',NULL),(18,18,'W',NULL),(18,19,'W',NULL),(18,20,'W',NULL),(19,1,'W',NULL),(19,2,'W',NULL),(19,3,'W',NULL),(19,4,'W',NULL),(19,5,'W',NULL),(19,6,'W',NULL),(19,7,'W',NULL),(19,8,'W',NULL),(19,9,'W',NULL),(19,10,'W',NULL),(19,11,'W',NULL),(19,12,'W',NULL),(19,13,'W',NULL),(19,14,'W',NULL),(19,15,'W',NULL),(19,16,'W',NULL),(19,17,'W',NULL),(19,18,'W',NULL),(19,19,'W',NULL),(19,20,'W',NULL),(20,1,'W',NULL),(20,2,'W',NULL),(20,3,'W',NULL),(20,4,'W',NULL),(20,5,'W',NULL),(20,6,'W',NULL),(20,7,'W',NULL),(20,8,'W',NULL),(20,9,'W',NULL),(20,10,'W',NULL),(20,11,'W',NULL),(20,12,'W',NULL),(20,13,'W',NULL),(20,14,'W',NULL),(20,15,'W',NULL),(20,16,'W',NULL),(20,17,'W',NULL),(20,18,'W',NULL),(20,19,'W',NULL),(20,20,'W',NULL);
+INSERT INTO `board` VALUES (1,1,'W',NULL),(1,2,'W',NULL),(1,3,'W',NULL),(1,4,'W',NULL),(1,5,'W',NULL),(1,6,'W',NULL),(1,7,'W',NULL),(1,8,'W',NULL),(1,9,'W',NULL),(1,10,'W',NULL),(1,11,'W',NULL),(1,12,'W',NULL),(1,13,'W',NULL),(1,14,'W',NULL),(1,15,'W',NULL),(1,16,'W',NULL),(1,17,'W',NULL),(1,18,'W',NULL),(1,19,'W',NULL),(1,20,'W',NULL),(2,1,'W',NULL),(2,2,'W',NULL),(2,3,'W',NULL),(2,4,'W',NULL),(2,5,'W',NULL),(2,6,'W',NULL),(2,7,'W',NULL),(2,8,'W',NULL),(2,9,'W',NULL),(2,10,'W',NULL),(2,11,'W',NULL),(2,12,'W',NULL),(2,13,'W',NULL),(2,14,'W',NULL),(2,15,'W',NULL),(2,16,'W',NULL),(2,17,'W',NULL),(2,18,'W',NULL),(2,19,'W',NULL),(2,20,'W',NULL),(3,1,'W',NULL),(3,2,'W',NULL),(3,3,'W',NULL),(3,4,'W',NULL),(3,5,'W',NULL),(3,6,'W',NULL),(3,7,'W',NULL),(3,8,'W',NULL),(3,9,'W',NULL),(3,10,'W',NULL),(3,11,'W',NULL),(3,12,'W',NULL),(3,13,'W',NULL),(3,14,'W',NULL),(3,15,'W',NULL),(3,16,'W',NULL),(3,17,'W',NULL),(3,18,'W',NULL),(3,19,'W',NULL),(3,20,'W',NULL),(4,1,'W',NULL),(4,2,'W',NULL),(4,3,'W',NULL),(4,4,'W',NULL),(4,5,'W',NULL),(4,6,'W',NULL),(4,7,'W',NULL),(4,8,'W',NULL),(4,9,'W',NULL),(4,10,'W',NULL),(4,11,'W',NULL),(4,12,'W',NULL),(4,13,'W',NULL),(4,14,'W',NULL),(4,15,'W',NULL),(4,16,'W',NULL),(4,17,'W',NULL),(4,18,'W',NULL),(4,19,'W',NULL),(4,20,'W',NULL),(5,1,'W',NULL),(5,2,'W',NULL),(5,3,'W',NULL),(5,4,'R','C'),(5,5,'R','C'),(5,6,'R','C'),(5,7,'W',NULL),(5,8,'W',NULL),(5,9,'W',NULL),(5,10,'W',NULL),(5,11,'W',NULL),(5,12,'W',NULL),(5,13,'W',NULL),(5,14,'W',NULL),(5,15,'W',NULL),(5,16,'W',NULL),(5,17,'W',NULL),(5,18,'W',NULL),(5,19,'W',NULL),(5,20,'W',NULL),(6,1,'W',NULL),(6,2,'W',NULL),(6,3,'W',NULL),(6,4,'W',NULL),(6,5,'W',NULL),(6,6,'W',NULL),(6,7,'W',NULL),(6,8,'W',NULL),(6,9,'W',NULL),(6,10,'W',NULL),(6,11,'W',NULL),(6,12,'W',NULL),(6,13,'W',NULL),(6,14,'W',NULL),(6,15,'W',NULL),(6,16,'W',NULL),(6,17,'W',NULL),(6,18,'W',NULL),(6,19,'W',NULL),(6,20,'W',NULL),(7,1,'W',NULL),(7,2,'W',NULL),(7,3,'W',NULL),(7,4,'W',NULL),(7,5,'W',NULL),(7,6,'W',NULL),(7,7,'W',NULL),(7,8,'W',NULL),(7,9,'W',NULL),(7,10,'W',NULL),(7,11,'W',NULL),(7,12,'W',NULL),(7,13,'W',NULL),(7,14,'W',NULL),(7,15,'W',NULL),(7,16,'W',NULL),(7,17,'W',NULL),(7,18,'W',NULL),(7,19,'W',NULL),(7,20,'W',NULL),(8,1,'W',NULL),(8,2,'W',NULL),(8,3,'W',NULL),(8,4,'W',NULL),(8,5,'W',NULL),(8,6,'W',NULL),(8,7,'W',NULL),(8,8,'W',NULL),(8,9,'W',NULL),(8,10,'W',NULL),(8,11,'W',NULL),(8,12,'W',NULL),(8,13,'W',NULL),(8,14,'W',NULL),(8,15,'W',NULL),(8,16,'W',NULL),(8,17,'W',NULL),(8,18,'W',NULL),(8,19,'W',NULL),(8,20,'W',NULL),(9,1,'W',NULL),(9,2,'W',NULL),(9,3,'W',NULL),(9,4,'W',NULL),(9,5,'W',NULL),(9,6,'W',NULL),(9,7,'W',NULL),(9,8,'W',NULL),(9,9,'W',NULL),(9,10,'W',NULL),(9,11,'W',NULL),(9,12,'W',NULL),(9,13,'W',NULL),(9,14,'W',NULL),(9,15,'W',NULL),(9,16,'W',NULL),(9,17,'W',NULL),(9,18,'W',NULL),(9,19,'W',NULL),(9,20,'W',NULL),(10,1,'W',NULL),(10,2,'W',NULL),(10,3,'W',NULL),(10,4,'W',NULL),(10,5,'W',NULL),(10,6,'W',NULL),(10,7,'W',NULL),(10,8,'W',NULL),(10,9,'W',NULL),(10,10,'W',NULL),(10,11,'W',NULL),(10,12,'W',NULL),(10,13,'W',NULL),(10,14,'W',NULL),(10,15,'W',NULL),(10,16,'W',NULL),(10,17,'W',NULL),(10,18,'W',NULL),(10,19,'W',NULL),(10,20,'W',NULL),(11,1,'W',NULL),(11,2,'W',NULL),(11,3,'W',NULL),(11,4,'W',NULL),(11,5,'W',NULL),(11,6,'W',NULL),(11,7,'W',NULL),(11,8,'W',NULL),(11,9,'W',NULL),(11,10,'W',NULL),(11,11,'W',NULL),(11,12,'W',NULL),(11,13,'W',NULL),(11,14,'W',NULL),(11,15,'W',NULL),(11,16,'W',NULL),(11,17,'W',NULL),(11,18,'W',NULL),(11,19,'W',NULL),(11,20,'W',NULL),(12,1,'W',NULL),(12,2,'W',NULL),(12,3,'W',NULL),(12,4,'W',NULL),(12,5,'W',NULL),(12,6,'W',NULL),(12,7,'W',NULL),(12,8,'W',NULL),(12,9,'W',NULL),(12,10,'W',NULL),(12,11,'W',NULL),(12,12,'W',NULL),(12,13,'W',NULL),(12,14,'W',NULL),(12,15,'W',NULL),(12,16,'W',NULL),(12,17,'W',NULL),(12,18,'W',NULL),(12,19,'W',NULL),(12,20,'W',NULL),(13,1,'W',NULL),(13,2,'W',NULL),(13,3,'W',NULL),(13,4,'W',NULL),(13,5,'W',NULL),(13,6,'W',NULL),(13,7,'W',NULL),(13,8,'W',NULL),(13,9,'W',NULL),(13,10,'W',NULL),(13,11,'W',NULL),(13,12,'W',NULL),(13,13,'W',NULL),(13,14,'W',NULL),(13,15,'W',NULL),(13,16,'W',NULL),(13,17,'W',NULL),(13,18,'W',NULL),(13,19,'W',NULL),(13,20,'W',NULL),(14,1,'W',NULL),(14,2,'W',NULL),(14,3,'W',NULL),(14,4,'W',NULL),(14,5,'W',NULL),(14,6,'W',NULL),(14,7,'W',NULL),(14,8,'W',NULL),(14,9,'W',NULL),(14,10,'W',NULL),(14,11,'W',NULL),(14,12,'W',NULL),(14,13,'W',NULL),(14,14,'W',NULL),(14,15,'W',NULL),(14,16,'W',NULL),(14,17,'W',NULL),(14,18,'W',NULL),(14,19,'W',NULL),(14,20,'W',NULL),(15,1,'W',NULL),(15,2,'W',NULL),(15,3,'W',NULL),(15,4,'W',NULL),(15,5,'W',NULL),(15,6,'W',NULL),(15,7,'W',NULL),(15,8,'W',NULL),(15,9,'W',NULL),(15,10,'W',NULL),(15,11,'W',NULL),(15,12,'W',NULL),(15,13,'W',NULL),(15,14,'W',NULL),(15,15,'W',NULL),(15,16,'W',NULL),(15,17,'W',NULL),(15,18,'W',NULL),(15,19,'W',NULL),(15,20,'W',NULL),(16,1,'W',NULL),(16,2,'W',NULL),(16,3,'W',NULL),(16,4,'W',NULL),(16,5,'W',NULL),(16,6,'W',NULL),(16,7,'W',NULL),(16,8,'W',NULL),(16,9,'W',NULL),(16,10,'W',NULL),(16,11,'W',NULL),(16,12,'W',NULL),(16,13,'W',NULL),(16,14,'W',NULL),(16,15,'W',NULL),(16,16,'W',NULL),(16,17,'W',NULL),(16,18,'W',NULL),(16,19,'W',NULL),(16,20,'W',NULL),(17,1,'W',NULL),(17,2,'W',NULL),(17,3,'W',NULL),(17,4,'W',NULL),(17,5,'W',NULL),(17,6,'W',NULL),(17,7,'W',NULL),(17,8,'W',NULL),(17,9,'W',NULL),(17,10,'W',NULL),(17,11,'W',NULL),(17,12,'W',NULL),(17,13,'W',NULL),(17,14,'W',NULL),(17,15,'W',NULL),(17,16,'W',NULL),(17,17,'W',NULL),(17,18,'W',NULL),(17,19,'W',NULL),(17,20,'W',NULL),(18,1,'W',NULL),(18,2,'W',NULL),(18,3,'W',NULL),(18,4,'W',NULL),(18,5,'W',NULL),(18,6,'W',NULL),(18,7,'W',NULL),(18,8,'W',NULL),(18,9,'W',NULL),(18,10,'W',NULL),(18,11,'W',NULL),(18,12,'W',NULL),(18,13,'W',NULL),(18,14,'W',NULL),(18,15,'W',NULL),(18,16,'W',NULL),(18,17,'W',NULL),(18,18,'W',NULL),(18,19,'W',NULL),(18,20,'W',NULL),(19,1,'W',NULL),(19,2,'W',NULL),(19,3,'W',NULL),(19,4,'W',NULL),(19,5,'W',NULL),(19,6,'W',NULL),(19,7,'W',NULL),(19,8,'W',NULL),(19,9,'W',NULL),(19,10,'W',NULL),(19,11,'W',NULL),(19,12,'W',NULL),(19,13,'W',NULL),(19,14,'W',NULL),(19,15,'W',NULL),(19,16,'W',NULL),(19,17,'W',NULL),(19,18,'W',NULL),(19,19,'W',NULL),(19,20,'W',NULL),(20,1,'W',NULL),(20,2,'W',NULL),(20,3,'W',NULL),(20,4,'W',NULL),(20,5,'W',NULL),(20,6,'W',NULL),(20,7,'W',NULL),(20,8,'W',NULL),(20,9,'W',NULL),(20,10,'W',NULL),(20,11,'W',NULL),(20,12,'W',NULL),(20,13,'W',NULL),(20,14,'W',NULL),(20,15,'W',NULL),(20,16,'W',NULL),(20,17,'W',NULL),(20,18,'W',NULL),(20,19,'W',NULL),(20,20,'W',NULL);
 /*!40000 ALTER TABLE `board` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,7 +160,7 @@ CREATE TABLE `game_status` (
 
 LOCK TABLES `game_status` WRITE;
 /*!40000 ALTER TABLE `game_status` DISABLE KEYS */;
-INSERT INTO `game_status` VALUES ('started','R','D','2022-11-28 16:39:59');
+INSERT INTO `game_status` VALUES ('started','R','B','2022-12-29 02:27:16');
 /*!40000 ALTER TABLE `game_status` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -186,7 +186,7 @@ CREATE TABLE `players` (
 
 LOCK TABLES `players` WRITE;
 /*!40000 ALTER TABLE `players` DISABLE KEYS */;
-INSERT INTO `players` VALUES (NULL,'B',NULL,NULL),(NULL,'R',NULL,NULL);
+INSERT INTO `players` VALUES ('jj','B','c40a9d49d824603805ccb55e7d2bbe84','2022-12-29 02:27:16'),('harry','R','15835361313423fed60415d91e2576da','2022-12-29 02:27:11');
 /*!40000 ALTER TABLE `players` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,9 +210,126 @@ CREATE TABLE `red_repository` (
 
 LOCK TABLES `red_repository` WRITE;
 /*!40000 ALTER TABLE `red_repository` DISABLE KEYS */;
-INSERT INTO `red_repository` VALUES ('A','R'),('B','R'),('C','R'),('D','R'),('E','R'),('F','R'),('G','R'),('H','R'),('I','R'),('J','R'),('K','R'),('L','R'),('M','R'),('N','R'),('O','R'),('P','R'),('Q','R'),('R','R'),('S','R'),('T','R'),('U','R');
+INSERT INTO `red_repository` VALUES ('A','R'),('B','R'),('C','W'),('D','R'),('E','R'),('F','R'),('G','R'),('H','R'),('I','R'),('J','R'),('K','R'),('L','R'),('M','R'),('N','R'),('O','R'),('P','R'),('Q','R'),('R','R'),('S','R'),('T','R'),('U','R');
 /*!40000 ALTER TABLE `red_repository` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Dumping events for database 'erg'
+--
+
+--
+-- Dumping routines for database 'erg'
+--
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `clean_board` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `clean_board`()
+BEGIN
+    REPLACE INTO board SELECT * FROM board_empty;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `full_repositories` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `full_repositories`()
+BEGIN
+	REPLACE INTO blue_repository SELECT * FROM full_repository;
+    REPLACE INTO red_repository SELECT * FROM full_repository;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `full_repositoriesB` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `full_repositoriesB`()
+BEGIN
+	REPLACE INTO blue_repository SELECT * FROM full_repositoryb;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `full_repositoriesR` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `full_repositoriesR`()
+BEGIN
+    REPLACE INTO red_repository SELECT * FROM full_repositoryr;
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'NO_ZERO_IN_DATE,NO_ZERO_DATE,NO_ENGINE_SUBSTITUTION' */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `move_piece` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_general_ci */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `move_piece`(p_color char, piece char, x2 INTEGER, y2 INTEGER, checker char)
+BEGIN
+
+if(p_color='B') then
+	UPDATE blue_repository SET val='W' WHERE piece_shape=piece;
+elseif(p_color='R') then
+	UPDATE red_repository SET val='W' WHERE piece_shape=piece;
+end if;
+
+	UPDATE board
+	SET piece_shape=piece,piece_color=p_color
+	WHERE xA=x2 AND yA=y2;
+if(checker='k') then
+	UPDATE game_status SET p_turn=if(p_color='R','B','R');	
+end if;
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -223,4 +340,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2022-12-21 20:46:21
+-- Dump completed on 2022-12-29  4:30:56

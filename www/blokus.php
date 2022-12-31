@@ -26,7 +26,7 @@ switch ($r=array_shift($request)){
 	case 'board' :
 		switch ($b=array_shift($request)){
                 	case '': 
-                        case null: handle_board($method);
+                        case null: handle_board($method,$input);
                                 break;
                         case 'piece': 
                                 handle_piece($method, $request[0],$request[1],$input);
@@ -99,11 +99,12 @@ function handle_repoB($method){
 }
 
 
-function handle_board($method){
+function handle_board($method,$input){
         if($method=='GET'){
-                show_board();
+                show_board($input);
         }else if($method=='POST'){
-                reset_board();            
+                reset_board();
+                show_board($input);            
         }else{
                 header('HTPP/1.1 405 Method Not Allowed');
         }
