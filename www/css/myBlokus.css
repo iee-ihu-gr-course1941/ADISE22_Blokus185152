@@ -1,14 +1,19 @@
-#blokus_table TD {width: 2em; height:2em;border:2px solid black;text-align:center;}
-#blokus_table {border-collapse: collapse;}
+#blokus_table TD {width: 2em; height:2em;border:2px solid rgb(0, 0, 0);text-align:center;}
+#blokus_table {border-collapse: collapse; margin-left:700px}
 
 #repo_Red_table TD {width: 2em; height:2em;border:2px solid rgb(184, 4, 4);text-align:center;}
 #repo_Red_table {border-collapse: collapse;} 
 
-#repo_Blue_table TD {width: 2em; height:2em;border:2px solid rgb(4, 10, 160);text-align:center;}
+#repo_Blue_table TD {width: 2em; height:2em;border:2px solid rgb(4, 10, 160);text-align:center; color: rgb(255, 255, 255);}
 #repo_Blue_table {border-collapse: collapse;} 
 
-#square_15_15{background-color: rgba(4, 12, 170, 0.4);}
-#square_5_5{background-color: rgb(164, 3, 3, 0.4);}
+#square_15_15{background-color: rgb(4, 10, 160);}
+#square_5_5{background-color: rgb(184, 4, 4);}
+
+body  {
+    background-color: #ffffff;
+    color:#000000;
+  }
 
 TD.W_square {background-color:rgba(0, 0, 0, 0.104);}
 
