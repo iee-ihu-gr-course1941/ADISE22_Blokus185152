@@ -3,8 +3,8 @@ $host='localhost';
 $db = 'test_project_db';
 require_once "db_upass.php";
 
-$user=$DB_USER;
-$pass=$DB_PASS;
+$user='it185152';
+$pass='';
 
 
 if(gethostname()=='users.iee.ihu.gr') {
