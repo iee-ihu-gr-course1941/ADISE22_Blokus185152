@@ -1,10 +1,10 @@
 <?php
 $host='localhost';
 $db = 'erg';
-require_once "db_upass.php";
+//require_once "db_upass.php";
 
-$user=$DB_USER;
-$pass=$DB_PASS;
+$user='it185152';
+$pass='';
 
 
 if(gethostname()=='users.iee.ihu.gr') {
