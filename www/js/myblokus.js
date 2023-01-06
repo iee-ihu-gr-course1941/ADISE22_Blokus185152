@@ -315,6 +315,7 @@ function check_repo_by_data(dataAll) {
 	console.log(dataAll);
 	repo=dataAll;
 	ok=0;
+	wts=0;
 	schm=getschm();
 	var s = $('#the_move').val();
 	var a = s.trim().split(/[ ]+/);
@@ -329,6 +330,14 @@ function check_repo_by_data(dataAll) {
 			ok=1;
 			console.log("molis egine 1 to ok");
 		}
+		if(o.val=='W'){
+			wts=wts+1;
+			console.log("molis egine +1 to wts");
+		}
+	}
+	if(wts==21){
+		console.log("YPARXEI NIKITIS");
+		alert('YOU ARE THE WINNER !!!!!');
 	}
 	console.log("To ok einai = ");
 	console.log(ok);
