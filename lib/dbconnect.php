@@ -1,6 +1,6 @@
 <?php
 $host='localhost';
-$db = 'erg';
+$db = 'test_project_db';
 //require_once "db_upass.php";
 
 $user='it185152';
