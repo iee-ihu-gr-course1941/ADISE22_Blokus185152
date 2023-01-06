@@ -1,7 +1,7 @@
 <?php
 $host='localhost';
 $db = 'test_project_db';
-require_once "db_upass.php";
+//require_once "db_upass.php";
 
 $user='it185152';
 $pass='';
