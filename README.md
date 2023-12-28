@@ -5,7 +5,7 @@
 Μπορείτε να κατεβάσετε τοπικά ή να επισκευτείτε την σελίδα: 
 https://users.iee.ihu.gr/~it185152/ADISE22_Blokus185152/www/
 
-(----website under maintenance-----)
+(----website under maintenance----)
 
 # Εγκατάσταση
 
